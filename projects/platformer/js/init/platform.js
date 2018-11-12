@@ -36,7 +36,7 @@
 
         // example:
         platform.create(200, 800);
-        platform.create(300, 300);
+        platform.create(300, 150);
         platform.create(150, 200);
         platform.create(350, 300);
         
