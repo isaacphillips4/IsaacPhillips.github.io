@@ -20,17 +20,23 @@ var init = function (window) {
         ////////////////////////////////////////////////////////////////
         
         // TODO 1 : Declare and initialize our variables //
-
-
-        // TODO 2 : Create a function that draws a circle  //
-        var drawCircle;
+        var circle;
+        var circles = [];
         
 
+        // TODO 2 : Create a function that draws a circle  //
+        var drawCircle = function(){
+        circle = draw.randomCircleInArea(canvas, true, true, '#f4e842', 2);
+        physikz.addRandomVelocity(circle, canvas);
+        view.addChild(circle);
+        circles.push(circle);
+};
         // TODO 3 : Call the drawCircle function 5 times //
-
-
+ 
         // TODO 7 : Create a Loop to call drawCircle 100 times
-
+        for (var d = 0; d <= 100; d++){
+            drawCircle(d);
+        }
     
         view.addChild(fps);
         app.addUpdateable(fps);
@@ -43,31 +49,34 @@ var init = function (window) {
                 circle.x = 0 - circle.radius;
             } 
             // TODO 5a) if the circle has gone out of the left side of the screen then place it off-screen right
-            else if ( / * Fill me in! * / ) {
-                
+            else if (circle.x < 0 + circle.radius) {
+               circle.x = canvas.width - circle.radius;
             } 
 
             // TODO 5b) if the circle has gone out of the top side of the screen then place it off-screen bottom
-            if ( / * Fill me in! * / ) {
-                
+            if ( circle.y < 0 + circle.radius ) {
+                circle.y = canvas.height - circle.radius;
             }
             // TODO 5c) if the circle has gone out of the bottom side of the screen then place it off-screen top 
-            else if ( / * Fill me in! * / ) {
-            
+            else if ( circle.y > canvas.height + circle.radius ) {
+                circle.y = 0 + circle.radius;
             }
             // YOUR TODO 5 CODE ENDS HERE //////////////////////////
         }
     
         var update = function() {
             // TODO 4 : Update the circle's position //
-
-            
+       
             // TODO 6 : Call checkCircleBounds on your circles.
            
 
             // TODO 8 : Iterate over the array
-           
-
+           for (var p = 0; p <= 100; p++) {
+               physikz.updatePosition(circles[p])
+           }
+for (var r = 0; r <= 100; r++){
+    runner.checkCircleBounds(circles[r]);
+}
         }
         
         ////////////////////////////////////////////////////////////////////
