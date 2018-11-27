@@ -18,7 +18,7 @@ var background = function (window) {
 
         // container which will be returned
         var background;
-        
+        var tree;
         // Add any variables that will be used by render AND update here:
         
         // add objects for display inb ackground
@@ -54,6 +54,10 @@ background.addChild(moon);
             
             
             // TODO 4: Part 1 - Add a tree
+            tree = draw.bitmap('img/tree.png');
+tree.x = 0;
+tree.y = 0;
+background.addChild(tree);
             
         }
         
