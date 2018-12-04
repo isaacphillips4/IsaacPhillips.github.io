@@ -18,17 +18,82 @@ var level01 = function (window) {
             gameItems: [
                 {type: 'sawblade',x:400,y:groundY},
                 {type: 'sawblade',x:600,y:groundY},
-                {type: 'sawblade',x:900,y:groundY}
+                {type: 'sawblade',x:900,y:groundY},
+                {type: 'box',x:100,y:200}
+        
             ]
+            
         };
-        window.levelData = levelData;
+                 window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
         game.setDebugMode(true);
 
         // BEGIN EDITING YOUR CODE HERE
+         function createSawBlade(x,y) {
+      
+var hitZoneSize = 25;
+var damageFromObstacle = 10;
+var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+myObstacle.x = x;
+myObstacle.y = y;
+game.addGameItem(myObstacle);    
+var obstacleImage = draw.bitmap('img/sawblade.png');
+myObstacle.addChild(obstacleImage);
+obstacleImage.x = -25;
+obstacleImage.y = -25;
 
+
+} 
+        createSawBlade(300,200);
+        createSawBlade(600,300);
+    
+       for(var i = 0; i < levelData.gameItems.length ; i++){
+           createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y )
+           
+       }
+       
+       // create box
+       
+       function createBox(x,y) {
+           var hitZoneSize = 25;
+var damageFromObstacle = 10;
+var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+myObstacle.x = x;
+myObstacle.y = y;
+game.addGameItem(myObstacle);    
+var obstacleImage = draw.bitmap('img/box.jpg');
+myObstacle.addChild(obstacleImage);
+obstacleImage.x = -25;
+obstacleImage.y = -25;
+
+    
+};
+ createBox(100,200)
+        createBox(200,300)
+      var enemy =  game.createGameItem('enemy',25);
+var redSquare = draw.rect(50,50,'red');
+redSquare.x = -25;
+redSquare.y = -25;
+enemy.addChild(redSquare);
+enemy.x = 400;
+enemy.y = groundY-50;
+game.addGameItem(enemy);
+
+enemy.velocityX = -10;
+
+enemy.onPlayerCollision = function() {
+    console.log('The enemy has hit Halle');
+};
+
+enemy.onProjectileCollision = function() {
+    console.log("The Halle has hit an enemy");
+};
+      
 
     }
+  
+
+  
 };
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
