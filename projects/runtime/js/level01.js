@@ -19,6 +19,7 @@ var level01 = function (window) {
                 {type: 'sawblade',x:400,y:groundY},
                 {type: 'sawblade',x:600,y:groundY},
                 {type: 'sawblade',x:900,y:groundY},
+                
                 {type: 'box',x:100,y:200}
         
             ]
@@ -44,8 +45,8 @@ obstacleImage.y = -25;
 
 
 } 
-        createSawBlade(300,200);
-        createSawBlade(600,300);
+        createSawBlade(200,-200);
+        createSawBlade(400,-500);
     
        for(var i = 0; i < levelData.gameItems.length ; i++){
            createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y )
@@ -70,27 +71,62 @@ obstacleImage.y = -25;
 };
  createBox(100,200)
         createBox(200,300)
-      var enemy =  game.createGameItem('enemy',25);
+  
+
+
+function createEnemy(x,y){
+        var enemy =  game.createGameItem('enemy',25);
 var redSquare = draw.rect(50,50,'red');
 redSquare.x = -25;
 redSquare.y = -25;
 enemy.addChild(redSquare);
-enemy.x = 400;
-enemy.y = groundY-50;
+enemy.x = x;
+enemy.y = y;
 game.addGameItem(enemy);
 
-enemy.velocityX = -10;
-
-enemy.onPlayerCollision = function() {
+enemy.velocityX = -1 ;
+        enemy.onPlayerCollision = function() {
     console.log('The enemy has hit Halle');
+    enemy.fadeOut();
 };
 
 enemy.onProjectileCollision = function() {
     console.log("The Halle has hit an enemy");
+    game.increaseScore(100);
+    enemy.fadeOut();
+
 };
       
-
+      
     }
+createEnemy(400,groundY-50)
+        createEnemy(500,groundY-125)
+        function createReward(x,y){
+        var enemy =  game.createGameItem('enemy',25);
+var redSquare = draw.rect(50,50,'blue');
+redSquare.x = -25;
+redSquare.y = -25;
+enemy.addChild(redSquare);
+enemy.x = x;
+enemy.y = y;
+game.addGameItem(enemy);
+
+enemy.velocityX = -1 ;
+        enemy.onPlayerCollision = function() {
+    console.log('The reward gave Halle points');
+       game.increaseScore(100);
+    enemy.fadeOut();
+};
+
+
+      
+      
+    }
+    createReward(900,groundY-100)
+    
+ }
+   
+   
   
 
   
